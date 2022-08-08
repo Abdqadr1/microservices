@@ -1,23 +1,37 @@
 package com.qadr.openfeign.feignclients;
 
 import com.qadr.customer.Customer;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.springframework.cloud.openfeign.FallbackFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
- * fallback for hystrix client
+ * fallback factory for hystrix client
  * If one needs access to the cause that made the fallback trigger,
  * one can use the fallbackFactory attribute inside @FeignClient.
  * */
-public class CustomerClientCallback implements CustomerClient{
-    @Override
-    public List<Customer> getCustomers() {
-        return Collections.emptyList();
-    }
+@Component
+@Slf4j
+public class CustomerClientCallback implements FallbackFactory<CustomerClient> {
 
     @Override
-    public Long countAllCustomers() {
-        return 0L;
+    public CustomerClient create(Throwable cause) {
+        return new CustomerClient() {
+            @Override
+            public List<Customer> getCustomers() {
+                log.info(cause.getMessage());
+                return Collections.emptyList();
+            }
+
+            @Override
+            public Long countAllCustomers() {
+                log.info(cause.getMessage());
+                return 0L;
+            }
+        };
     }
 }

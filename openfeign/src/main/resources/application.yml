@@ -4,8 +4,19 @@ spring:
   application:
     name: open-feign
 feign:
-  hystrix:
+  circuitbreaker:
     enabled: true
+    alphanumeric-ids:
+      enabled: true
+resilience4j:
+  circuitbreaker:
+    instances:
+      CustomerClient:
+        minimumNumberOfCalls: 3
+  timelimiter:
+    instances:
+      CustomerClient:
+        timeoutDuration: 10s
 eureka:
   client:
     service-url:

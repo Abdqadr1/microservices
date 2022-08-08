@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient(value = "customer",
-        url = "http://localhost:8085/customer", fallback = CustomerClientCallback.class)
+@FeignClient(value = "customer",fallbackFactory = CustomerClientCallback.class)
 public interface CustomerClient {
 
-    @GetMapping
+    @GetMapping("/customer")
     List<Customer> getCustomers();
 
-    @GetMapping("/count")
+    @GetMapping("/customer/count")
     Long countAllCustomers();
 }

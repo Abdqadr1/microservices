@@ -3,21 +3,29 @@ package com.qadr.openfeign;
 import com.qadr.customer.Customer;
 import com.qadr.openfeign.feignclients.CustomerClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
-@Component
-public class Runner implements CommandLineRunner {
+@RestController
+@RequestMapping("/c")
+public class TheController {
     @Autowired
     private CustomerClient customerClient;
-
-    @Override
-    public void run(String... args) {
+    
+    @GetMapping
+    public List<Customer> listAllCustomer(){
         List<Customer> customers = customerClient.getCustomers();
         System.out.println(customers);
+        return customers;
+    }
 
+    @GetMapping("/count")
+    public Long countAllCustomer(){
         Long count = customerClient.countAllCustomers();
         System.out.println("Customer count: "+ count);
+        return count;
     }
 }
