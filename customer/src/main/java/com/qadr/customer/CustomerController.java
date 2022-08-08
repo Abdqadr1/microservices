@@ -29,6 +29,11 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
+    @GetMapping("/find/{keyword}")
+    public List<Customer> byAddress(@PathVariable("keyword") String keyword){
+        return customerService.findCustomer(keyword);
+    }
+
     @PostMapping
     public Customer saveCustomer(@RequestBody Customer customer){
         return customerService.save(customer);
