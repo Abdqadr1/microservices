@@ -47,10 +47,13 @@ public class CustomerService {
         Criteria criteria = new Criteria();
         query.addCriteria(
                 criteria.orOperator(
-                        Criteria.where("firstName").regex(keyword),
-                        Criteria.where("lastName").regex(keyword),
-                        Criteria.where("email").regex(keyword),
-                        Criteria.where("address.street").regex(keyword)
+//                        Criteria.where("firstName").regex(keyword),
+//                        Criteria.where("lastName").regex(keyword),
+//                        Criteria.where("email").regex(keyword),
+                        Criteria.where("address.street").regex(keyword),
+                        Criteria.where("address.city").regex(keyword),
+                        Criteria.where("address.state").regex(keyword),
+                        Criteria.where("address.country").regex(keyword)
                 )
         );
         List<Customer> customers = mongoTemplate.find(query, Customer.class);

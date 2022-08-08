@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: open-feign
+feign:
+  hystrix:
+    enabled: true
 eureka:
   client:
     service-url:
