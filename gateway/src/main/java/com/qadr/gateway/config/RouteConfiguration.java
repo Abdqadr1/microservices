@@ -5,6 +5,9 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static org.springframework.cloud.gateway.support.RouteMetadataUtils.CONNECT_TIMEOUT_ATTR;
+import static org.springframework.cloud.gateway.support.RouteMetadataUtils.RESPONSE_TIMEOUT_ATTR;
+
 @Configuration
 public class RouteConfiguration {
 
@@ -14,6 +17,8 @@ public class RouteConfiguration {
                 .route("path_route", r -> r.path("/get")
                         .uri("http://httpbin.org"))
                 .route("customer", r -> r.path("/customer/**")
+                        .metadata(RESPONSE_TIMEOUT_ATTR, 200)
+                        .metadata(CONNECT_TIMEOUT_ATTR, 200)
                         .uri("lb://customer"))
                 .route("open-feign", r -> r.path("/c/**")
                         .uri("lb://open-feign"))
