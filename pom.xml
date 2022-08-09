@@ -10,11 +10,11 @@
 
     <modules>
         <module>eureka-server</module>
-        <module>eureka-client</module>
-        <module>eureka-client2</module>
+        <module>kafka-consumer</module>
         <module>customer</module>
         <module>openfeign</module>
         <module>gateway</module>
+        <module>kafkaproducer</module>
     </modules>
 
     <properties>

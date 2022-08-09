@@ -8,18 +8,21 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="openfeign" />
-        <module name="eureka-client2" />
-        <module name="eureka-client" />
+        <module name="kafka-consumer" />
+        <module name="kafkaproducer" />
         <module name="eureka-server" />
         <module name="gateway" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kafka-producer" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="eureka-client" options="" />
       <module name="eureka-server" options="" />
+      <module name="kafka-producer" options="" />
     </option>
   </component>
 </project>
