@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ConsumerBean {
-    @KafkaListener(topics = "qadr")
+    @KafkaListener(topics = "qadr", groupId = "qadr-group")
     public void processMessage(String content) {
         System.out.println("Listener says: " + content);
     }
