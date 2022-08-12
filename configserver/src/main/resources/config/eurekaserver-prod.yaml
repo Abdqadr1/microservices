@@ -1,5 +1,8 @@
 spring:
   application:
+    environment: production
+    config:
+      type: classpath
     name: eurekaserver
 server:
   port: 8761

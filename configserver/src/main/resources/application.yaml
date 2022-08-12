@@ -1,0 +1,23 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: config-server
+  profiles:
+#    active: native
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Abdqadr1/microservice-config.git
+          clone-on-start: true # Flag to indicate that the repository should be cloned on startup (not on demand). Generally leads to slower startup but faster first query.
+          default-label: main #git branch to use
+          timeout: 5 #in seconds
+#          skip-ssl-validation: true # disable Git server SSL certificate
+
+#        native:
+#          search-locations:
+#for classpath            - classpath:/config
+#            - file:///C://springconfig
+

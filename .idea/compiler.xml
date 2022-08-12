@@ -11,6 +11,7 @@
         <module name="kafka-consumer" />
         <module name="kafkaproducer" />
         <module name="shared-library" />
+        <module name="configserver" />
         <module name="eureka-server" />
         <module name="gateway" />
         <module name="customer" />
