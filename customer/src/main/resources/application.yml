@@ -3,9 +3,9 @@ server:
 spring:
   data:
     mongodb:
-#      authentication-database: admin
-#      username: root
-#      password: example
+      authentication-database: admin
+      username: root
+      password: example
       database: qadr_mongodb
       port: 27017
       host: localhost

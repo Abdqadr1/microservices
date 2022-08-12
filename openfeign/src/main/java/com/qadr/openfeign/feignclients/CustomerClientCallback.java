@@ -1,8 +1,6 @@
 package com.qadr.openfeign.feignclients;
-
-import com.qadr.customer.Customer;
+import com.qadr.sharedlibrary.Customer;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 

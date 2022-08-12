@@ -1,0 +1,5 @@
+com\qadr\customer\CustomerService.class
+com\qadr\customer\Runner.class
+com\qadr\customer\CustomerApplication.class
+com\qadr\customer\CustomerRepository.class
+com\qadr\customer\CustomerController.class

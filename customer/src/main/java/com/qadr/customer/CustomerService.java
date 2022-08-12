@@ -1,5 +1,6 @@
 package com.qadr.customer;
 
+import com.qadr.sharedlibrary.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -47,9 +48,9 @@ public class CustomerService {
         Criteria criteria = new Criteria();
         query.addCriteria(
                 criteria.orOperator(
-//                        Criteria.where("firstName").regex(keyword),
-//                        Criteria.where("lastName").regex(keyword),
-//                        Criteria.where("email").regex(keyword),
+                        Criteria.where("firstName").regex(keyword),
+                        Criteria.where("lastName").regex(keyword),
+                        Criteria.where("email").regex(keyword),
                         Criteria.where("address.street").regex(keyword),
                         Criteria.where("address.city").regex(keyword),
                         Criteria.where("address.state").regex(keyword),

@@ -15,6 +15,7 @@
         <module>openfeign</module>
         <module>gateway</module>
         <module>kafkaproducer</module>
+        <module>shared-library</module>
     </modules>
 
     <properties>
@@ -54,6 +55,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>local</id>
+            <name>local-repo</name>
+            <url>file:C:/Users/HP/.m2/repository</url>
+        </repository>
+    </repositories>
 
     <build>
         <pluginManagement>

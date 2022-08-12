@@ -1,8 +1,10 @@
 package com.qadr.customer;
 
+import com.qadr.sharedlibrary.Address;
+import com.qadr.sharedlibrary.Customer;
+import com.qadr.sharedlibrary.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;

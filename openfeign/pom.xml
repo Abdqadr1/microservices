@@ -35,9 +35,29 @@
         </dependency>
         <dependency>
             <groupId>com.qadr</groupId>
-            <artifactId>customer</artifactId>
+            <artifactId>shared-library</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.qadr.openfeign.OpenfeignApplication</mainClass>
+                    <image>
+                        <name>openfeign</name>
+                    </image>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

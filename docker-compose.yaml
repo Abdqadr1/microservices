@@ -1,11 +1,36 @@
-version: '3.8'
+version: "3.8"
 services:
+  eureka-server:
+    image: abdqadr/eureka-server:1.0
+    container_name: eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - qadr_network
+  customer:
+    image: abdqadr/customer:1.0
+    container_name: customer
+    restart: always
+    ports:
+      - "8085:8085"
+    networks:
+      - qadr_network
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_AUTHENTICATIONDATABASE: admin
+      SPRING_DATA_MONGODB_USERNAME: root
+      SPRING_DATA_MONGODB_PASSWORD: example
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: eureka-server:8761/eureka
   mongodb:
     image: mongo
     container_name: mongodb
     restart: always
     ports:
       - "27017:27107"
+    networks:
+      - qadr_network
     volumes:
       - data:/data
     environment:
@@ -18,6 +43,8 @@ services:
     restart: always
     ports:
       - "8081:8081"
+    networks:
+      - qadr_network
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
@@ -26,5 +53,4 @@ services:
 volumes:
   data: {}
 networks:
-  default:
-    name: mongodb_network
+  qadr_network:

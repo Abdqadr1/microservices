@@ -11,6 +11,7 @@
 	<version>1.0</version>
 	<name>eureka client</name>
 	<description>Eureka client</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -41,6 +42,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.qadr.kafkaconsumer.KafkaConsumerApplication</mainClass>
+					<image>
+						<name>kafka/consumer</name>
+					</image>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

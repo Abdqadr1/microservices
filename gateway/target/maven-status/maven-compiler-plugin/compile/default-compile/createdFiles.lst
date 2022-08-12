@@ -1,0 +1,3 @@
+com\qadr\gateway\PathFilter.class
+com\qadr\gateway\config\RouteConfiguration.class
+com\qadr\gateway\GatewayApplication.class

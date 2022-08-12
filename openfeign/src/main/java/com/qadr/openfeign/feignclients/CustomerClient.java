@@ -1,6 +1,6 @@
 package com.qadr.openfeign.feignclients;
 
-import com.qadr.customer.Customer;
+import com.qadr.sharedlibrary.Customer;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
