@@ -8,6 +8,14 @@ services:
       - "8761:8761"
     networks:
       - qadr_network
+  config-server:
+    image: abdqadr/configserver:1.0
+    container_name: configserver
+    restart: always
+    ports:
+      - "9090:9090"
+    networks:
+      - qadr_network
   customer:
     image: abdqadr/customer:1.0
     container_name: customer
@@ -16,13 +24,22 @@ services:
       - "8085:8085"
     networks:
       - qadr_network
+    depends_on:
+      - mongodb
+      - eureka-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_DATA_MONGODB_PORT: 27017
       SPRING_DATA_MONGODB_AUTHENTICATIONDATABASE: admin
       SPRING_DATA_MONGODB_USERNAME: root
       SPRING_DATA_MONGODB_PASSWORD: example
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: eureka-server:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
   mongodb:
     image: mongo
     container_name: mongodb

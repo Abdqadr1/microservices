@@ -10,9 +10,11 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired private CustomerService customerService;
+    @Autowired private AppServiceConfig appServiceConfig;
 
     @GetMapping
     public List<Customer> getAll(){
+        System.out.println(appServiceConfig);
         return customerService.getAllCustomers();
     }
 
