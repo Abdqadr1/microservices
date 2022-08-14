@@ -29,7 +29,7 @@
 				<configuration>
 					<mainClass>com.qadr.eurekaserver.EurekaServerApplication</mainClass>
 					<image>
-						<name>eureka-server</name>
+						<name>abdqadr/eureka-server</name>
 					</image>
 				</configuration>
 				<executions>

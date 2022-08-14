@@ -10,7 +10,6 @@
         <module name="openfeign" />
         <module name="kafka-consumer" />
         <module name="kafkaproducer" />
-        <module name="shared-library" />
         <module name="configserver" />
         <module name="eureka-server" />
         <module name="gateway" />
@@ -19,6 +18,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="kafka-producer" target="17" />
+      <module name="shared-library" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

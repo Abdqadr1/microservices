@@ -37,11 +37,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.qadr</groupId>
-            <artifactId>shared-library</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -52,7 +47,7 @@
                 <configuration>
                     <mainClass>com.qadr.customer.CustomerApplication</mainClass>
                     <image>
-                        <name>customer</name>
+                        <name>abdqadr/customer</name>
                     </image>
                 </configuration>
                 <executions>

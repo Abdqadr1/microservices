@@ -1,4 +1,4 @@
-package com.qadr.sharedlibrary;
+package com.qadr.customer.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -35,7 +35,10 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -45,7 +48,7 @@
                 <configuration>
                     <mainClass>com.qadr.kafkaproducer.KafkaProducerApplication</mainClass>
                     <image>
-                        <name>kafka-producer</name>
+                        <name>abdqadr/kafka-producer</name>
                     </image>
                 </configuration>
                 <executions>

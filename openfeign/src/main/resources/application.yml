@@ -2,30 +2,21 @@ server:
   port: 8087
 spring:
   application:
-    name: open-feign
-feign:
-  circuitbreaker:
-    enabled: true
-    alphanumeric-ids:
+    name: openfeign
+  config:
+    fail-fast: true
+    import: configserver:http://localhost:9090/
+management:
+  endpoint:
+    shutdown:
       enabled: true
-resilience4j:
-  circuitbreaker:
-    instances:
-      CustomerClient:
-        minimumNumberOfCalls: 3
-  timelimiter:
-    instances:
-      CustomerClient:
-        timeoutDuration: 10s
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-logging:
-  level:
-    com:
-      netflix:
-        eureka: OFF
-        discovery: OFF
 #  logging.level.com.netflix.eureka=OFF
 #  logging.level.com.netflix.discovery=OFF

@@ -1,8 +1,8 @@
 package com.qadr.customer;
 
-import com.qadr.sharedlibrary.Address;
-import com.qadr.sharedlibrary.Customer;
-import com.qadr.sharedlibrary.Gender;
+import com.qadr.customer.model.Address;
+import com.qadr.customer.model.Customer;
+import com.qadr.customer.model.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 

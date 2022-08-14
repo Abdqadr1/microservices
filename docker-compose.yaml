@@ -1,24 +1,24 @@
-version: "3.8"
+version: "3.9"
 services:
-  eureka-server:
+  eurekaserver:
     image: abdqadr/eureka-server:1.0
-    container_name: eureka-server
     restart: always
     ports:
       - "8761:8761"
     networks:
       - qadr_network
-  config-server:
+  configserver:
     image: abdqadr/configserver:1.0
-    container_name: configserver
     restart: always
     ports:
       - "9090:9090"
     networks:
       - qadr_network
+#    environment:
+#      SPRING_PROFILES_ACTIVE: native
+#      CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS: classpath:/config
   customer:
-    image: abdqadr/customer:1.0
-    container_name: customer
+    image: abdqadr/customer:latest
     restart: always
     ports:
       - "8085:8085"
@@ -26,20 +26,23 @@ services:
       - qadr_network
     depends_on:
       - mongodb
-      - eureka-server
+      - eurekaserver
+      - configserver
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
+        delay: 20s
+        max_attempts: 5
+        window: 360s
     environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:9090/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_DATA_MONGODB_PORT: 27017
       SPRING_DATA_MONGODB_AUTHENTICATIONDATABASE: admin
       SPRING_DATA_MONGODB_USERNAME: root
       SPRING_DATA_MONGODB_PASSWORD: example
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
   mongodb:
     image: mongo
     container_name: mongodb

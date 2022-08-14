@@ -1,6 +1,6 @@
 package com.qadr.customer;
 
-import com.qadr.sharedlibrary.Customer;
+import com.qadr.customer.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
