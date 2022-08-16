@@ -1,11 +1,13 @@
 package com.qadr.customer;
 
 import com.qadr.customer.model.Customer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -14,8 +16,12 @@ public class CustomerController {
 
     @GetMapping
     public List<Customer> getAll(){
-        System.out.println(appServiceConfig);
         return customerService.getAllCustomers();
+    }
+    @GetMapping("/properties")
+    public String props(){
+        log.info("getting properties");
+        return appServiceConfig.toString();
     }
 
     @GetMapping("/count")

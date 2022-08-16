@@ -11,9 +11,9 @@ import java.util.Map;
 @ConfigurationProperties()
 @Data
 public class AppServiceConfig {
-
     private Map<String, String> server;
 
     private Map<String, Object> spring;
 
+    private Map<String, Object> eureka;
 }

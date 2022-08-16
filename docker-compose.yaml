@@ -14,9 +14,24 @@ services:
       - "9090:9090"
     networks:
       - qadr_network
-#    environment:
-#      SPRING_PROFILES_ACTIVE: native
-#      CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS: classpath:/config
+  gateway:
+    image: abdqadr/gateway:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - qadr_network
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 5
+        window: 300s
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:9090/
   customer:
     image: abdqadr/customer:latest
     restart: always
@@ -31,18 +46,30 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        delay: 20s
+        delay: 15s
         max_attempts: 5
+        window: 240s
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:9090/
+  openfeign:
+    image: abdqadr/openfeign:latest
+    ports:
+      - "8087:8087"
+    networks:
+      - qadr_network
+    depends_on:
+      - configserver
+      - eurekaserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+        delay: 20s
         window: 360s
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_CONFIG_IMPORT: configserver:http://configserver:9090/
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka
-      SPRING_DATA_MONGODB_HOST: mongodb
-      SPRING_DATA_MONGODB_PORT: 27017
-      SPRING_DATA_MONGODB_AUTHENTICATIONDATABASE: admin
-      SPRING_DATA_MONGODB_USERNAME: root
-      SPRING_DATA_MONGODB_PASSWORD: example
   mongodb:
     image: mongo
     container_name: mongodb
@@ -70,6 +97,17 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_SERVER: mongodb
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  zipkin:
+    image: openzipkin/zipkin:latest
+    restart: always
+    ports:
+      - "9410:9410"
+      - "9411:9411"
+    networks:
+      - qadr_network
+    depends_on:
+      - customer
+      - opengeign
 volumes:
   data: {}
 networks:

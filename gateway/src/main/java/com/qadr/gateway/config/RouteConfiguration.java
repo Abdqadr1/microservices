@@ -21,7 +21,7 @@ public class RouteConfiguration {
                         .metadata(CONNECT_TIMEOUT_ATTR, 200)
                         .uri("lb://customer"))
                 .route("open-feign", r -> r.path("/c/**")
-                        .uri("lb://open-feign"))
+                        .uri("lb://openfeign"))
 //                .route("rewrite_route", r -> r.host("*.rewrite.org")
 //                        .filters(f -> f.rewritePath("/foo/(?<segment>.*)", "/${segment}"))
 //                        .uri("http://httpbin.org"))
