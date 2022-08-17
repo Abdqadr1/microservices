@@ -17,8 +17,7 @@ spring:
   application:
     name: customer
   config:
-    fail-fast: true
-    import: configserver:http://localhost:9090/
+    import: optional:configserver:http://localhost:9090/
 #  data:
 #    mongodb:
 #      authentication-database: admin

@@ -13,7 +13,7 @@ spring:
           uri: https://github.com/Abdqadr1/microservice-config.git
           clone-on-start: true # Flag to indicate that the repository should be cloned on startup (not on demand). Generally leads to slower startup but faster first query.
           default-label: main #git branch to use
-          timeout: 5 #in seconds
+          timeout: 20 #in seconds
 #          skip-ssl-validation: true # disable Git server SSL certificate
 
 #        native:

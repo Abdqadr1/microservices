@@ -9,8 +9,7 @@ spring:
   application:
     name: openfeign
   config:
-    fail-fast: true
-    import: configserver:http://localhost:9090/
+    import: optional:configserver:http://localhost:9090/
 management:
   endpoint:
     shutdown:
