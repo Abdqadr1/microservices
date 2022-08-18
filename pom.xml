@@ -15,7 +15,6 @@
         <module>openfeign</module>
         <module>gateway</module>
         <module>kafkaproducer</module>
-        <module>shared-library</module>
         <module>configserver</module>
     </modules>
 

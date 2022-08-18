@@ -1,15 +1,33 @@
 version: "3.8"
 services:
+  grafana:
+    image: "grafana/grafana:latest"
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    networks:
+      - qadr_network
+    depends_on:
+      - prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+    networks:
+      - qadr_network
   configserver:
     image: abdqadr/configserver:latest
     restart: always
     ports:
-      - "9090:9090"
+      - "9111:9111"
     networks:
       - qadr_network
-#    environment:
-#      SPRING_PROFILES_ACTIVE: native
-#      SPRING_CLOUD_CONFIG_SERVER_NATIVE_SE: classpath:/config
 
   eurekaserver:
     image: abdqadr/eureka-server:latest
@@ -27,7 +45,7 @@ services:
         delay: 10s
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CONFIG_IMPORT: http://configserver:9090/
+      SPRING_CONFIG_IMPORT: http://configserver:9111/
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
   gateway:
     image: abdqadr/gateway:latest
@@ -46,7 +64,7 @@ services:
         window: 300s
     environment:
       SPRING_PROFILES_ACTIVE: default
-      SPRING_CONFIG_IMPORT: http://configserver:9090/
+      SPRING_CONFIG_IMPORT: http://configserver:9111/
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka
   customer:
@@ -68,7 +86,7 @@ services:
         window: 240s
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:9090/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:9111/
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka
   openfeign:
@@ -89,7 +107,7 @@ services:
         window: 360s
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:9090/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:9111/
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka
 

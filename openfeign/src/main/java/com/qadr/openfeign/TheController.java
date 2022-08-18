@@ -2,6 +2,7 @@ package com.qadr.openfeign;
 import com.qadr.openfeign.feignclients.CustomerClient;
 import com.qadr.openfeign.model.Customer;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class TheController {
 
     @GetMapping("/rate")
     @RateLimiter(name = "rateIt", fallbackMethod = "rateFallBack")
+    @Timed(value = "rate.time", description = "rate endpoint timetaken")
     public Integer rateLimiter(){
         return rate++;
     }

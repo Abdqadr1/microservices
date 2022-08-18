@@ -1,6 +1,7 @@
 package com.qadr.customer;
 
 import com.qadr.customer.model.Customer;
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ public class CustomerController {
     public List<Customer> getAll(){
         return customerService.getAllCustomers();
     }
+
+    @Timed(value = "properties.time", description = "Time taken for properties")
     @GetMapping("/properties")
     public String props(){
         log.info("getting properties");
