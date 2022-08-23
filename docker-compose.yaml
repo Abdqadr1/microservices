@@ -31,11 +31,15 @@ services:
       - qadr_network
   keycloak:
     image: quay.io/keycloak/keycloak:19.0.1
-    restart: always
     ports:
-      - "9080:8080"
+      - "8080:8080"
+    command:
+      - start-dev
     networks:
       - qadr_network
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
   configserver:
     image: abdqadr/configserver:latest
     restart: always
@@ -66,11 +70,14 @@ services:
     image: abdqadr/gateway:latest
     restart: always
     ports:
-      - "8080:8080"
+      - "9001:9001"
     networks:
       - qadr_network
     depends_on:
       - configserver
+      - keycloak
+      - zipkin
+      - eurekaserver
     deploy:
       restart_policy:
         condition: on-failure
@@ -80,6 +87,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: http://configserver:9111/
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://keycloak:8080/realms/master/protocol/openid-connect/certs
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka
   customer:
@@ -139,7 +147,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-
 #  mongo-express:
 #    image: mongo-express
 #    container_name: mongo-express
