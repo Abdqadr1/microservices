@@ -1,0 +1,13 @@
+server:
+  port: 7000
+spring:
+  data:
+    mongodb:
+      database: customers
+      host: localhost
+#      username: root
+#      password: example
+      port: 27017
+
+  application:
+    name: ReactiveWeb

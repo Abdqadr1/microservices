@@ -16,6 +16,7 @@
         <module>gateway</module>
         <module>kafkaproducer</module>
         <module>configserver</module>
+        <module>reactiveweb</module>
     </modules>
 
     <properties>
