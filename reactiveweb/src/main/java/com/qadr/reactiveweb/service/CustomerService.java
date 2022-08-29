@@ -23,9 +23,9 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
-    public Mono<Customer> saveCustomer(Customer customerMono){
+    public Mono<Customer> saveCustomer(Mono<Customer> customerMono){
 
-        return customerRepository.save(customerMono);
+        return customerRepository.save(customerMono.block());
     }
 
     public Flux<Customer> findAgeRange(int min, int max){
