@@ -1,0 +1,6 @@
+dependencies:
+- name: qadr-common
+  repository: file://../../qadr-common
+  version: 0.1.0
+digest: sha256:e1210b9ecd798403c1551be938c327d39867a642947136a9244d04484446ee27
+generated: "2022-08-28T22:15:12.1037957+08:00"

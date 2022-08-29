@@ -1,0 +1,27 @@
+dependencies:
+- name: qadr-common
+  repository: file://../../qadr-common
+  version: 0.1.0
+- name: zipkin
+  repository: file://../zipkin
+  version: 0.1.0
+- name: configserver
+  repository: file://../configserver
+  version: 0.1.0
+- name: eurekaserver
+  repository: file://../eurekaserver
+  version: 0.1.0
+- name: customer
+  repository: file://../customer
+  version: 0.1.0
+- name: openfeign
+  repository: file://../openfeign
+  version: 0.1.0
+- name: gateway
+  repository: file://../gateway
+  version: 0.1.0
+- name: zipkin
+  repository: file://../zipkin
+  version: 0.1.0
+digest: sha256:0ba81fb9af27daa1c74b385329022d2a6e9a6b8fab400f174eba0cd40050c6a3
+generated: "2022-08-28T22:15:53.1351616+08:00"
