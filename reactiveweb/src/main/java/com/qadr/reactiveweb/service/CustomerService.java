@@ -2,13 +2,17 @@ package com.qadr.reactiveweb.service;
 
 import com.qadr.reactiveweb.dao.CustomerDao;
 import com.qadr.reactiveweb.dao.CustomerRepository;
+import com.qadr.reactiveweb.error.CustomException;
 import com.qadr.reactiveweb.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CustomerService {
@@ -20,12 +24,19 @@ public class CustomerService {
     }
 
     public Mono<Customer> findById(String id){
-        return customerRepository.findById(id);
+        return customerRepository.findById(id)
+                .switchIfEmpty(
+                        Mono.error(new CustomException(
+                                        HttpStatus.BAD_REQUEST,
+                                        String.format("Could not find customer with id: '%s'", id)))
+                );
     }
 
     public Mono<Customer> saveCustomer(Mono<Customer> customerMono){
-
-        return customerRepository.save(customerMono.block());
+        customerMono.switchIfEmpty(Mono.error(new CustomException(
+                HttpStatus.BAD_REQUEST,
+                "Customer is null")));
+        return customerMono.flatMap(customerRepository::save);
     }
 
     public Flux<Customer> findAgeRange(int min, int max){
@@ -33,6 +44,7 @@ public class CustomerService {
     }
 
     public Mono<Void> deleteCustomerById(String id){
+        findById(id);
         return customerRepository.deleteById(id);
     }
 
@@ -55,5 +67,16 @@ public class CustomerService {
 
     public Mono<Void> deleteAll() {
         return customerRepository.deleteAll();
+    }
+
+    public Mono<Customer> findByUsername(String username) {
+        return customerRepository.findByUsername(username)
+                .switchIfEmpty(
+                        Mono.error(
+                                new CustomException(
+                                    HttpStatus.BAD_REQUEST,
+                                    "Account does not exist")
+                        )
+                );
     }
 }
