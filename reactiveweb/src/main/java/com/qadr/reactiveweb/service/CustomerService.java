@@ -6,13 +6,11 @@ import com.qadr.reactiveweb.error.CustomException;
 import com.qadr.reactiveweb.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class CustomerService {
@@ -44,8 +42,7 @@ public class CustomerService {
     }
 
     public Mono<Void> deleteCustomerById(String id){
-        findById(id);
-        return customerRepository.deleteById(id);
+        return findById(id).flatMap(customer -> customerRepository.deleteById(id));
     }
 
 
@@ -70,7 +67,7 @@ public class CustomerService {
     }
 
     public Mono<Customer> findByUsername(String username) {
-        return customerRepository.findByUsername(username)
+        return customerRepository.findByUsernameIgnoreCase(username)
                 .switchIfEmpty(
                         Mono.error(
                                 new CustomException(

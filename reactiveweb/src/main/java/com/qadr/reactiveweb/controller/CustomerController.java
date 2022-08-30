@@ -3,12 +3,10 @@ package com.qadr.reactiveweb.controller;
 import com.qadr.reactiveweb.service.CustomerService;
 import com.qadr.reactiveweb.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/customer")

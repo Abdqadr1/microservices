@@ -10,5 +10,5 @@ import reactor.core.publisher.Mono;
 public interface CustomerRepository extends ReactiveMongoRepository<Customer, String> {
     Flux<Customer> findByAgeBetween(int min, int max);
 
-    Mono<Customer> findByUsername(String username);
+    Mono<Customer> findByUsernameIgnoreCase(String username);
 }
