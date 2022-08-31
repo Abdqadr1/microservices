@@ -37,9 +37,10 @@ public class SecurityConfig {
                 .authenticationManager(authenticationManager)
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange((exchanges) -> exchanges
+                        .pathMatchers(HttpMethod.GET,"/").permitAll()
                         .pathMatchers(HttpMethod.DELETE, "/customer/**").hasAnyAuthority("ADMIN")
                         .pathMatchers(HttpMethod.POST, "/customer", "/login").permitAll()
-                        .pathMatchers(HttpMethod.GET, "/customer").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/customer", "/video/**").permitAll()
                         .pathMatchers("/delete/**", "/deleteall/**").hasAnyAuthority("DEV")
                         .anyExchange().authenticated()
                 );
