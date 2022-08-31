@@ -3,6 +3,9 @@ package com.qadr.reactiveweb;
 import com.qadr.reactiveweb.dao.CustomerRepository;
 import com.qadr.reactiveweb.model.Customer;
 import com.qadr.reactiveweb.service.CustomerService;
+import com.qadr.reactiveweb.twilio.TwilioConfig;
+import com.twilio.Twilio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,17 +16,28 @@ import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
+import javax.annotation.PostConstruct;
+
 @SpringBootApplication
 public class ReactivewebApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ReactivewebApplication.class, args);
-	}
+	@Autowired
+	private TwilioConfig twilioConfig;
 
 	@Bean
 	PasswordEncoder passwordEncoder(){
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
+
+	@PostConstruct
+	public void initTwilio(){
+		Twilio.init(twilioConfig.getAccountSID(), twilioConfig.getAuthToken());
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(ReactivewebApplication.class, args);
+	}
+
 
 //	@Bean
 	CommandLineRunner commandLineRunner(CustomerRepository customerRepo, PasswordEncoder encoder){
