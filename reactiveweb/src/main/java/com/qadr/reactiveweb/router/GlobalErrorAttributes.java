@@ -12,6 +12,7 @@ import java.util.Map;
 /***
  * @author abdqadr
  * @description: Define custom error attributes for handling exception
+ *
  */
 
 @Component
