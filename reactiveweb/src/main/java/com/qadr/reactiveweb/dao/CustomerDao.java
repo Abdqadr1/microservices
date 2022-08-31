@@ -3,6 +3,7 @@ package com.qadr.reactiveweb.dao;
 import com.qadr.reactiveweb.model.Customer;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.List;
@@ -33,6 +34,13 @@ public class CustomerDao {
                 .delayElements(Duration.ofSeconds(1))
                 .doOnNext(i -> System.out.println("Customer " + i))
                 .map(i -> new Customer(i, "customer "+ i));
+    }
+
+    public Mono<Customer> getCustomerById(String id){
+        return Flux.range(1, 10)
+                .map(i -> new Customer(i, "customer "+ i))
+                .filter(customer -> customer.getId().equals(id))
+                .next();
     }
 
 

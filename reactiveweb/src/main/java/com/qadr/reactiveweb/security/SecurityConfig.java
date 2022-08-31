@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .authenticationManager(authenticationManager)
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange((exchanges) -> exchanges
-                        .pathMatchers(HttpMethod.GET,"/", "/router/sendOTP").permitAll()
+                        .pathMatchers(HttpMethod.GET,"/", "/router/**").permitAll()
                         .pathMatchers(HttpMethod.DELETE, "/customer/**").hasAnyAuthority("ADMIN")
                         .pathMatchers(HttpMethod.POST, "/customer", "/login").permitAll()
                         .pathMatchers(HttpMethod.GET, "/customer", "/video/**").permitAll()

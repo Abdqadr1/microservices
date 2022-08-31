@@ -1,4 +1,6 @@
 server:
+  error:
+    include-message: always
   port: 7000
 spring:
   data:
