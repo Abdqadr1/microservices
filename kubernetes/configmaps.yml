@@ -5,5 +5,5 @@ metadata:
 data:
   SPRING_ZIPKIN_BASEURL: http://zipkin-service:9411/
   SPRING_PROFILES_ACTIVE: prod
-  SPRING_CONFIG_IMPORT: configserver:http://configserver-service:8071/
-  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver-service:8070/eureka/
+  SPRING_CONFIG_IMPORT: configserver:http://configserver-service:9111/
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver-service:8761/eureka/

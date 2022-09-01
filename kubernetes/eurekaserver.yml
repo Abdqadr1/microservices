@@ -17,6 +17,7 @@ spec:
       containers:
         - name: eurekaserver
           image: abdqadr/eureka-server:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8761
           env:

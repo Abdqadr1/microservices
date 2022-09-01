@@ -17,6 +17,7 @@ spec:
       containers:
         - name: openfeign
           image: abdqadr/openfeign:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8087
           env:
