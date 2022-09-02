@@ -53,6 +53,16 @@
 			<artifactId>java-jwt</artifactId>
 			<version>3.19.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>8.35.0</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -13,7 +13,7 @@ spring:
 
   application:
     name: ReactiveWeb
-twilio:
-  accountSID: AC9c5aef1dcd3d875e6e1c3d241148dd93
-  authToken: f9b67387a48c1e83a62d1122af3b0426
-  trialNumber: +18158598682
+#twilio:
+#  accountSID: AC9c5aef1dcd3d875e6e1c3d241148dd93
+#  authToken: f9b67387a48c1e83a62d1122af3b0426
+#  trialNumber: +18158598682

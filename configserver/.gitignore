@@ -1,10 +1,12 @@
 HELP.md
 target/
+**/video/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### STS ###
+.mvn/
 .apt_generated
 .classpath
 .factorypath
